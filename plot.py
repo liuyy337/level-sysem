@@ -1,3 +1,5 @@
+import matplotlib
+matplotlib.use('Agg') 
 import matplotlib.pyplot as plt
 import numpy as np
 import os
@@ -56,7 +58,7 @@ liu_hours = liu_data['hours']
 liu_level = get_level(liu_data['exp'].sum())
 
 fig = plt.figure(figsize=(10, 6))
-plt.rcParams['font.family'] = "Microsoft YaHei"
+plt.rcParams['font.family'] = 'Noto Sans CJK JP'
 ax = fig.add_subplot(111)
 
 ax.plot(zhang_time, zhang_hours, color='blue', ls='-', lw='1', label=f'zhang({zhang_level})')
