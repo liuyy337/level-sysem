@@ -61,7 +61,7 @@ ax = fig.add_subplot(111)
 
 ax.plot(zhang_time, zhang_hours, color='blue', ls='-', lw='1', label=f'zhang({zhang_level})')
 ax.plot(liu_time, liu_hours, color='red', ls='-', lw='1', label=f'liu({liu_level})')
-ax.set_xlim(left=zhang_time.min(), right=zhang_time.max() + 1)
+ax.set_xlim(left=0, right=liu_time.max() + 1)
 ax.set_ylim(-0.5, 10)
 plot_config(ax)
 
