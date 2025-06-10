@@ -2,7 +2,6 @@ import matplotlib
 matplotlib.use('Agg') 
 import matplotlib.pyplot as plt
 import numpy as np
-import os
 from astropy.io import fits
 from astropy.time import Time
 from matplotlib.ticker import AutoMinorLocator, MultipleLocator, FuncFormatter
