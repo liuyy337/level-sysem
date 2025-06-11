@@ -45,7 +45,5 @@ liu_level = get_level(liu_data['exp'].sum())
 print("张徐蔚的级别：", zhang_level)
 print("刘洋毓的级别：", liu_level)
 
-print(zhang_data)
-zhang_time = np.array([isot_to_unix_tai(date) for date in zhang_data['date']])
-utc_time = time_formatter(zhang_time[0])
-print(utc_time)
+print(liu_data)
+
