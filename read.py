@@ -4,19 +4,7 @@ from astropy.io import fits
 from astropy.time import Time
 from matplotlib.ticker import AutoMinorLocator, MultipleLocator, FuncFormatter
 
-LEVELS = {
-    0:      "科员",
-    10:     "副科",
-    20:     "正科",
-    40:     "副处",
-    60:     "正处",
-    90:     "副厅",
-    120:    "正厅",
-    160:    "副部",
-    200:    "正部",
-    250:    "副国",
-    300:    "正国",
-}
+LEVELS = {0:"科员", 10:"副科", 20:"正科", 40:"副处", 60:"正处", 90:"副厅", 120:"正厅", 160:"副部", 200:"正部", 250:"副国", 300:"正国"}
 
 def isot_to_unix_tai(isot_str):
     return Time(isot_str, format='isot').unix_tai
