@@ -48,7 +48,7 @@ def parse_input_date(date_str):
     year = date_str[:4]
     month = date_str[4:6]
     day = date_str[6:]
-    return Time(f"{year}-{month}-{day}", format='iso').isot
+    return Time(f"{year}-{month}-{day}T23:59:59.000", format='isot').isot
 
 def update_learning_data(name, record_date, study_hours):
     exp_gain = study_hours - BASE_HOURS
