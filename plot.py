@@ -44,14 +44,16 @@ zhang_exp = np.cumsum(zhang_data['exp'])
 liu_exp = np.cumsum(liu_data['exp'])
 zhang_level = get_level(zhang_exp[-1])
 liu_level = get_level(liu_exp[-1])
-print(zhang_exp)
-print(liu_exp)
+print('zhang level = ', zhang_level, zhang_exp)
+print('liu level = ', liu_level, liu_exp)
+
 
 fig = plt.figure(figsize=(10, 6))
 plt.rcParams['font.family'] = 'WenQuanYi Micro Hei'
 ax = fig.add_subplot(111)
 
 ax.plot(zhang_time, zhang_exp, color='blue', ls='-', lw='1', label=f'zhang({zhang_level})')
+print(liu_time)
 ax.plot(liu_time, liu_exp, color='red', ls='-', lw='1', label=f'liu({liu_level})')
 ax.set_xlim(left=0, right=liu_time.max() + 1)
 setup(ax)
