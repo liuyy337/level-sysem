@@ -33,5 +33,6 @@ liu_level = get_level(liu_data['exp'].sum())
 print("张徐蔚的级别：", zhang_level)
 print("刘洋毓的级别：", liu_level)
 
+print(zhang_data)
 print(liu_data)
 
