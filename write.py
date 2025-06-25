@@ -19,24 +19,6 @@ LEVELS = {
     300:    "正国",
 }
 
-def init_fits():
-    if not os.path.exists('learning_time.fits'):
-        primary_hdu = fits.PrimaryHDU()
-        primary_hdu.header['K'] = K
-        primary_hdu.header['BASE_HRS'] = BASE_HOURS
-        primary_hdu.header['CREATED'] = Time.now().isot
-        primary_hdu.header['COMMENTS'] = "Learning time of zxw and liuyy."
-        empty_history = np.array([], dtype=[
-             ('date', 'S26'),
-             ('hours', 'f4'),
-             ('exp', 'f4')
-        ])
-        hdul = fits.HDUList([primary_hdu,
-            fits.BinTableHDU(empty_history, name='zhang'),
-            fits.BinTableHDU(empty_history, name='liu')
-        ])
-        hdul.writeto('learning_time.fits')
-
 def get_level(exp):
     thresholds = sorted(LEVELS.keys(), reverse=True)
     for t in thresholds:
@@ -50,8 +32,8 @@ def parse_input_date(date_str):
     day = date_str[6:]
     return Time(f"{year}-{month}-{day}T23:59:59.000", format='isot').isot
 
-def update_learning_data(name, record_date, study_hours):
-    exp_gain = study_hours - BASE_HOURS
+def update_learning_data(name, record_date, study_hours, exercise_hours):
+    exp_gain = (study_hours - BASE_HOURS) * 2 + exercise_hours * 10
     with fits.open('learning_time.fits', mode='update') as hdul:
         user_hdu = hdul[name.upper()]
         old_data = user_hdu.data
@@ -71,8 +53,6 @@ def update_learning_data(name, record_date, study_hours):
         }
     
 def main():
-    init_fits()
-    
     # input name
     while True:
         name = input("name (zhang/liu): ").lower().strip()
@@ -97,15 +77,23 @@ def main():
 
     # input study hours
     try:
-        hours = float(input("学习时长(hours): "))
-        result = update_learning_data(name, record_date, hours)
-        print(f"\n{result['name']}:")
-        print(f"date: {result['date']}")
-        print(f"exp gain: {result['exp_gain']:.1f}")
-        print(f"total exp: {result['total_exp']:.1f}")
-        print(f"当前级别: {result['level']}")
+        study_hours = float(input("学习时长(hours): "))
+    except ValueError as e:
+        print(f"Input error: {e}")
+    
+    # input exercise hours
+    try:
+        exercise_hours = float(input("运动时长(hours): "))
     except ValueError as e:
         print(f"Input error: {e}")
 
+    result = update_learning_data(name, record_date, study_hours, exercise_hours)
+    print(f"\n{result['name']}:")
+    print(f"date: {result['date']}")
+    print(f"exp gain: {result['exp_gain']:.1f}")
+    print(f"total exp: {result['total_exp']:.1f}")
+    print(f"当前级别: {result['level']}")
+    
 if __name__ == "__main__":
     main()
+    
