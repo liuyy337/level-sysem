@@ -23,8 +23,8 @@ def get_level(exp):
 
 def setup(ax):
     ax.set_xlabel("Time (UTC)")
-    ax.set_ylabel("Study Time (hours)")
-    ax.set_title("Statistics of study time in Office 421")
+    ax.set_ylabel("Experience")
+    ax.set_title("Statistics of experience in Office 421")
     ax.xaxis.set_major_locator(MultipleLocator(604800))
     ax.xaxis.set_minor_locator(AutoMinorLocator(7))
     ax.xaxis.set_major_formatter(FuncFormatter(time_formatter))
@@ -54,7 +54,7 @@ ax = fig.add_subplot(111)
 
 ax.plot(zhang_time, zhang_exp, color='blue', ls='-', lw='1', label=f'zhang({zhang_level})')
 ax.plot(liu_time, liu_exp, color='red', ls='-', lw='1', label=f'liu({liu_level})')
-ax.set_xlim(left=0, right=liu_time.max() + 1)
+ax.set_xlim(left=0, right=np.max([zhang_time.max(), liu_time.max()]) + 1)
 setup(ax)
 
 plt.savefig("learning_curve.pdf", bbox_inches='tight')
